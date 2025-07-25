@@ -1,0 +1,17 @@
+{
+  "name": "lifelog",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "author": "for_the_zero",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^37.2.4",
+    "electron-builder": "^26.0.12"
+  }
+}
