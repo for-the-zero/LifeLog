@@ -12,6 +12,14 @@
   },
   "devDependencies": {
     "electron": "^37.2.4",
-    "electron-builder": "^26.0.12"
+    "electron-builder": "^26.0.12",
+    "electron-rebuild": "^3.2.9"
+  },
+  "dependencies": {
+    "ffi-napi": "^4.0.3",
+    "node-cron": "^4.2.1",
+    "ref-napi": "^3.0.3",
+    "ref-wchar-napi": "^1.0.3",
+    "sqlite3": "^5.1.7"
   }
 }
