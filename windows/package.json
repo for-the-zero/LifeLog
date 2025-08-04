@@ -4,7 +4,6 @@
   "description": "",
   "license": "MIT",
   "author": "for_the_zero",
-  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "start": "electron .",
@@ -16,10 +15,8 @@
     "electron-rebuild": "^3.2.9"
   },
   "dependencies": {
-    "ffi-napi": "^4.0.3",
+    "get-windows": "^9.2.0",
     "node-cron": "^4.2.1",
-    "ref-napi": "^3.0.3",
-    "ref-wchar-napi": "^1.0.3",
     "sqlite3": "^5.1.7"
   }
 }
