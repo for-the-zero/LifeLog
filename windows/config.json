@@ -1,5 +1,7 @@
 {
     "server_url": "http://127.0.0.1:8787",
     "key": "SECRET_KEY",
-    "tai": "D:\\Tai\\Data\\data.db"
+    "tai": "D:\\Tai\\Data\\data.db",
+    "ps_path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "ss_save_path": "C:\\Users\\Lenovo\\Desktop\\ScreenShot\\"
 }

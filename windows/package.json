@@ -15,8 +15,48 @@
     "electron-rebuild": "^3.2.9"
   },
   "dependencies": {
+    "@electron/remote": "^2.1.3",
+    "electron-sudo": "^4.0.12",
     "get-windows": "^9.2.0",
     "node-cron": "^4.2.1",
     "sqlite3": "^5.1.7"
+  },
+  "build": {
+    "appId": "io.forthezero.lifelog",
+    "productName": "LifeLog",
+    "directories": {
+      "output": "builds"
+    },
+    "files": [
+      "/**/*",
+      "node_modules/**/*",
+      "index.js",
+      "db.js",
+      "get-active.js",
+      "config.json",
+      "icon.png"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        "zip"
+      ],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "icon.ico",
+      "installerHeaderIcon": "icon.ico",
+      "createStartMenuShortcut": true,
+      "shortcutName": "LMCanvas"
+    },
+    "extraResources": [
+      {
+        "from": "./elevate.exe",
+        "to": "./elevate.exe"
+      }
+    ]
   }
 }
