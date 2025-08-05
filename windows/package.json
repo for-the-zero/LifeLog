@@ -20,7 +20,6 @@
     "electron-sudo": "^4.0.12",
     "get-windows": "^9.2.0",
     "node-cron": "^4.2.1",
-    "pngjs": "^7.0.0",
     "sqlite3": "^5.1.7"
   },
   "build": {
@@ -41,7 +40,8 @@
     "asar": true,
     "win": {
       "target": [
-        "zip"
+        "zip",
+        "nsis"
       ],
       "icon": "icon.ico"
     },

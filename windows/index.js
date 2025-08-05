@@ -4,8 +4,6 @@ const path = require('path');
 const cron = require('node-cron');
 const fs = require('fs');
 const { screen } = require('@nut-tree-fork/nut-js');
-const { PNG } = require('pngjs');
-
 const get_time = require('./db');
 const { getActiveWindowInfo } = require('./get-active');
 
@@ -55,20 +53,6 @@ function restart_as_admin() {
 
 let tray = null;
 app.whenReady().then(() => {
-    tray = new Tray(path.join(__dirname, 'icon.png'));
-    const contextMenu = Menu.buildFromTemplate([
-        { label: '截图模式', type: 'submenu', submenu: [
-            { label: '关闭', type: 'radio', checked: screenshot_mode === 0, click: () => { ss_mode_change(0) } },
-            { label: '按键检测', type: 'radio', checked: screenshot_mode === 1, click: () => { ss_mode_change(0) } },
-            { label: '剪贴板识别', type: 'radio', checked: screenshot_mode === 2, click: () => { ss_mode_change(0) } },
-        ] },
-        { type: 'separator'},
-
-        { label: '管理员身份重启', type: 'normal', click: () => { restart_as_admin() } },
-        { label: '马上发送数据', type: 'normal', click: ()=>{setTimeout(send_data, 500);} },
-        { label: '退出', type: 'normal', click: () => { app.quit() } }
-    ]);
-    tray.setContextMenu(contextMenu);
 
     var screenshot_mode = 1;
     const ss_mode_change = (mode) => {
@@ -80,8 +64,10 @@ app.whenReady().then(() => {
                 break;
             case 1:
                 reg_ssmode1();
+                del_ssmode2();
                 break;
             case 2:
+                del_ssmode1();
                 reg_ssmode2();
                 break;
             default:
@@ -89,22 +75,25 @@ app.whenReady().then(() => {
         };
     };
     ss_mode_change(1);
+
+    tray = new Tray(path.join(__dirname, 'icon.png'));
+    const contextMenu = Menu.buildFromTemplate([
+        { label: '截图模式', type: 'submenu', submenu: [
+            { label: '关闭', type: 'radio', checked: screenshot_mode === 0, click: () => { ss_mode_change(0) } },
+            { label: '按键检测', type: 'radio', checked: screenshot_mode === 1, click: () => { ss_mode_change(1) } },
+            { label: '剪贴板识别', type: 'radio', checked: screenshot_mode === 2, click: () => { ss_mode_change(2) } },
+        ] },
+        { type: 'separator'},
+
+        { label: '管理员身份重启', type: 'normal', click: () => { restart_as_admin() } },
+        { label: '马上发送数据', type: 'normal', click: ()=>{setTimeout(send_data, 500);} },
+        { label: '退出', type: 'normal', click: () => { app.quit() } }
+    ]);
+    tray.setContextMenu(contextMenu);
 });
 
 if(fs.existsSync(config.ss_save_path) === false){
     fs.mkdirSync(config.ss_save_path, { recursive: true });
-};
-
-function save_screenshot(image) {
-    const screenshot_path = path.join(config.ss_save_path, `${Date.now()}.png`);
-    fs.writeFile(screenshot_path, image, (err) => {
-        if (err) {
-            console.error(err);
-            dialog.showErrorBox('错误', err.message);
-        } else {
-            console.log(screenshot_path);
-        };
-    });
 };
 
 function del_ssmode1(){
@@ -117,9 +106,35 @@ function reg_ssmode1(){
             fileFormat='.png',
             filePath=config.ss_save_path
         );
-        console.log('Screenshot saved');
+        //console.log('Screenshot saved');
     });
 };
 
-function del_ssmode2(){};
-function reg_ssmode2(){};
+var ssm2_interval = null;
+var ssm2_last_hash = null;
+function del_ssmode2(){
+    if(ssm2_interval){
+        clearInterval(ssm2_interval);
+        ssm2_interval = null;
+    };
+};
+function reg_ssmode2(){
+    ssm2_interval = setInterval(()=>{
+        const image = clipboard.readImage();
+        let hash = image.toDataURL();
+        if( image.isEmpty() || hash === ssm2_last_hash ){return;};
+        ssm2_last_hash = hash;
+        fs.writeFile(
+            path.join(config.ss_save_path, `screenshot_${Date.now()}.png`), 
+            image.toPNG(), 
+            (err) => {
+                if(err){
+                    console.error(err);
+                    dialog.showErrorBox('错误', err.message);
+                }else{
+                    //console.log('Screenshot saved');
+                };
+            }
+        );
+    },1000);
+};
