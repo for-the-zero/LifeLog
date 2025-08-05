@@ -1,7 +1,10 @@
-const { app, Tray, Menu, nativeImage, dialog } = require('electron');
+const { app, Tray, Menu, nativeImage, dialog, clipboard, globalShortcut } = require('electron');
 const { spawn } = require('child_process');
 const path = require('path');
 const cron = require('node-cron');
+const fs = require('fs');
+const { screen } = require('@nut-tree-fork/nut-js');
+const { PNG } = require('pngjs');
 
 const get_time = require('./db');
 const { getActiveWindowInfo } = require('./get-active');
@@ -50,11 +53,6 @@ function restart_as_admin() {
     app.quit();
 };
 
-var screenshot_mode = 1;
-const ss_mode_change = (mode) => {
-    screenshot_mode = mode;
-};
-
 let tray = null;
 app.whenReady().then(() => {
     tray = new Tray(path.join(__dirname, 'icon.png'));
@@ -71,4 +69,57 @@ app.whenReady().then(() => {
         { label: '退出', type: 'normal', click: () => { app.quit() } }
     ]);
     tray.setContextMenu(contextMenu);
+
+    var screenshot_mode = 1;
+    const ss_mode_change = (mode) => {
+        screenshot_mode = mode;
+        switch (mode) {
+            case 0:
+                del_ssmode1();
+                del_ssmode2();
+                break;
+            case 1:
+                reg_ssmode1();
+                break;
+            case 2:
+                reg_ssmode2();
+                break;
+            default:
+                break;
+        };
+    };
+    ss_mode_change(1);
 });
+
+if(fs.existsSync(config.ss_save_path) === false){
+    fs.mkdirSync(config.ss_save_path, { recursive: true });
+};
+
+function save_screenshot(image) {
+    const screenshot_path = path.join(config.ss_save_path, `${Date.now()}.png`);
+    fs.writeFile(screenshot_path, image, (err) => {
+        if (err) {
+            console.error(err);
+            dialog.showErrorBox('错误', err.message);
+        } else {
+            console.log(screenshot_path);
+        };
+    });
+};
+
+function del_ssmode1(){
+    globalShortcut.unregister('PrintScreen');
+};
+function reg_ssmode1(){
+    globalShortcut.register('PrintScreen',async()=>{
+        await screen.capture(
+            fileName=`screenshot_${Date.now()}`,
+            fileFormat='.png',
+            filePath=config.ss_save_path
+        );
+        console.log('Screenshot saved');
+    });
+};
+
+function del_ssmode2(){};
+function reg_ssmode2(){};
