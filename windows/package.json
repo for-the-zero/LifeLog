@@ -52,7 +52,7 @@
       "uninstallerIcon": "icon.ico",
       "installerHeaderIcon": "icon.ico",
       "createStartMenuShortcut": true,
-      "shortcutName": "LMCanvas"
+      "shortcutName": "LifeLog"
     },
     "extraResources": [
       {

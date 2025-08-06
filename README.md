@@ -2,6 +2,38 @@
 
 ---
 
+# Data
+
+请求`server_url/get`，返回json数组，每个子项是一个对象
+
+Request `server_url/get`, Return json array, each item is an object.
+
+电脑： / Computer:
+
+```jsonc
+{
+    "device": "laptop",
+    "app_title": "Window Title",
+    "app_exe": "exe name",
+    "used": 114514, // 使用时长(秒) / Used time(seconds)
+    "time": "1145141919810", // 时间戳(毫秒) / Timestamp(ms)
+}
+```
+
+手机: / Mobile:
+
+```jsonc
+{
+    "device": "phone",
+    "app_anme": "App Name",
+    "app_pm": "package name",
+    "battery": 100, // 电量 / Battery
+    "time": "1145141919810", // 时间戳(毫秒) / Timestamp(ms)
+}
+```
+
+---
+
 # 图标 / Icon
 
 windows/icon.png

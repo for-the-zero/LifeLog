@@ -14,7 +14,7 @@ if(app.isPackaged){
     app.setLoginItemSettings({ openAtLogin: true });
 };
 
-cron.schedule('5,15,25,35,45,55 * * * *', send_data);
+cron.schedule('0,5,10,15,20,25,30,35,40,45,50,55 * * * *', send_data);
 async function send_data(){
     let active = await getActiveWindowInfo();
     let time = await get_time(active.path);
@@ -29,7 +29,8 @@ async function send_data(){
                 device: 'laptop',
                 app_title: active.title,
                 app_exe: active.exe,
-                time: time,
+                used: time,
+                time: Date.now(),
             }),
         });
     }catch(e){

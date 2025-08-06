@@ -10,7 +10,7 @@
 	"observability": {
 		"enabled": true
 	},
-	"kv_namespaces": [ /*不是你这文件怎么死活ignore不了*/
+	"kv_namespaces": [
 		{
 			"binding": "LIFELOG_KV",
 			"id": "your-namespace-id",

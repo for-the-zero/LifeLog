@@ -38,8 +38,8 @@ async function handlePost(request, env, key, secret) {
 		const newLogEntry = await request.json();
 		let logs = await env.LIFELOG_KV.get(key, { type: "json" }) || [];
 		logs.unshift(newLogEntry);
-		if (logs.length > 75) {
-			logs = logs.slice(0, 75);
+		if (logs.length > 50) {
+			logs = logs.slice(0, 50);
 		};
 		await env.LIFELOG_KV.put(key, JSON.stringify(logs));
 		return new Response(JSON.stringify({ success: true, newLog: newLogEntry }), {
