@@ -34,7 +34,7 @@ Modify the secret key in `server/src/index.js`, change the binding of kv in `ser
 
 Use any app like that, I use [AutoTask](https://github.com/xjunz/AutoTask), just follow the two files, not difficult
 
-~~别的我都用不上手，这个基本上想要的功能缺了一半，我还得用shell获取。这就算了，shell执行功能有bug（不然你猜为什么要用这种奇怪的方式进行请求），不知道怎么解决，它会把命令分为多行给到curl，报错里面全是`application`不是主机、一串数字数字（时间戳之类的）不是主机……~~
+~~别的我都用不上手，这个基本上想要的功能缺了一半，我还得用shell获取。这就算了，shell执行功能有bug（不然你猜为什么要用这种奇怪的方式进行请求），不知道怎么解决，它会把命令分为多行给到curl，报错里面全是`application`不是主机、一串数字（时间戳之类的）不是主机……~~
 
 ~~If you want to know what i wrote above, translate it yourself!~~
 
@@ -91,8 +91,32 @@ I'm afraid you won't like this README, so I use Gemini Cli to generate it~~, laz
 
 [GO!!!](README_GC.md)
 
-```
-╭────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮│                                                                                                                            ││  Agent powering down. Goodbye!                                                                                             ││                                                                                                                            ││  Interaction Summary                                                                                                       ││  Tool Calls:                 6 ( ✔ 6 ✖ 0 )                                                                                 ││  Success Rate:               100.0%                                                                                        ││  User Agreement:             100.0% (1 reviewed)                                                                           ││                                                                                                                            ││  Performance                                                                                                               ││  Wall Time:                  9m 51s                                                                                        ││  Agent Active:               3m 29s                                                                                        ││    » API Time:               3m (86.0%)                                                                                    ││    » Tool Time:              29.4s (14.0%)                                                                                 ││                                                                                                                            ││                                                                                                                            ││  Model Usage                  Reqs   Input Tokens  Output Tokens                                                           ││  ───────────────────────────────────────────────────────────────                                                           ││  gemini-2.5-pro                  9        138,386          6,626                                                           ││                                                                                                                            ││  Savings Highlight: 73,306 (53.0%) of input tokens were served from the cache, reducing costs.                             ││                                                                                                                            ││  » Tip: For a full token breakdown, run `/stats model`.                                                                    ││                                                                                                                            │╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+```txt
+╭────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                            │
+│  Agent powering down. Goodbye!                                                                                             │
+│                                                                                                                            │
+│  Interaction Summary                                                                                                       │
+│  Tool Calls:                 6 ( ✔ 6 ✖ 0 )                                                                                │
+│  Success Rate:               100.0%                                                                                        │
+│  User Agreement:             100.0% (1 reviewed)                                                                           │
+│                                                                                                                            │
+│  Performance                                                                                                               │
+│  Wall Time:                  9m 51s                                                                                        │
+│  Agent Active:               3m 29s                                                                                        │
+│    » API Time:               3m (86.0%)                                                                                    │
+│    » Tool Time:              29.4s (14.0%)                                                                                 │
+│                                                                                                                            │
+│                                                                                                                            │
+│  Model Usage                  Reqs   Input Tokens  Output Tokens                                                           │
+│  ───────────────────────────────────────────────────────────────                                                           │
+│  gemini-2.5-pro                  9        138,386          6,626                                                           │
+│                                                                                                                            │
+│  Savings Highlight: 73,306 (53.0%) of input tokens were served from the cache, reducing costs.                             │
+│                                                                                                                            │
+│  » Tip: For a full token breakdown, run `/stats model`.                                                                    │
+│                                                                                                                            │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 ---

@@ -240,9 +240,3 @@ The data is stored and retrieved as a JSON array. Each object in the array repre
     "time": "1678886400000"
 }
 ```
-
-## 图标许可/Icon License
-
-The icon used in the Windows application is from the [Siemens IX Icons](https://github.com/siemens/ix-icons) library, which is licensed under the [MIT License](https://github.com/siemens/ix-icons/blob/main/LICENSE.md). The icon was generated using the [AppIcon Forge](https://zhangyu1818.github.io/appicon-forge/).
-
-Windows 应用程序中使用的图标来自 [Siemens IX Icons](https://github.com/siemens/ix-icons) 库，该库根据 [MIT 许可证](https://github.com/siemens/ix-icons/blob/main/LICENSE.md) 授权。该图标是使用 [AppIcon Forge](https://zhangyu1818.github.io/appicon-forge/) 生成的。
